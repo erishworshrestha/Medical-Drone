@@ -1,0 +1,21 @@
+PARAM_SET {target_system : 7, target_component : 1, param_id : MAV_SYS_STATUS_S, param_value : 101.0, param_type : 9}
+
+
+Retrieving a Parameter
+To retrieve just a single parameter send a PARAM_REQUEST_READ message with the following fields:
+
+target_system : the MAVLink system id of the vehicle (normally “1”)
+target_components : normally “1”
+param_id : the human readable 16 character parameter name if known. If not known, this field can be anything as long as the param_index is set to a non-negative number
+param_index : the parameter index number or -1 if the “param_id” field should be used instead. Note that it is better to use the param_id field because this index may change if “hidden” parameters are exposed (see below).use the param_id field because this index may change if “hidden” parameters are exposed (see below).
+
+
+
+Setting a Parameter
+To set the value of a single parameter send a PARAM_SET message with the following fields:
+
+target_system : the MAVLink system id of the vehicle (normally “1”)
+target_components : normally “1”
+param_id : the human readable 16 character parameter name
+param_value : the new value for the parameter expressed as a float
+param_type : the MAV_PARAM_TYPE for the parameter. This must match the type of the parameter within the AutoPilot and will be MAV_PARAM_TYPE_INT8, MAV_PARAM_TYPE_INT16, MAV_PARAM_TYPE_INT32 or MAV_PARAM_TYPE_REAL32 (the only types that ArduPilot supports). It may be convenient to store the “param_type” field from the PARAM_VALUE message sent by the flight controller for this parameter.
